@@ -89,16 +89,30 @@
     <div class="blink" id="blinkText">Ara suka ngewe</div>
 
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('active');
+        // Fungsi untuk membaca parameter dari URL
+        function getURLParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
         }
 
+        // Fungsi untuk mengganti teks di area berkedip
         function changeText() {
             const newText = document.getElementById('newText').value;
             if (newText.trim()) {
                 document.getElementById('blinkText').textContent = newText;
             }
+        }
+
+        // Fungsi untuk menampilkan atau menyembunyikan menu
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+
+        // Mengatur teks berdasarkan parameter URL (jika ada)
+        const textParam = getURLParameter('text');
+        if (textParam) {
+            document.getElementById('blinkText').textContent = decodeURIComponent(textParam);
         }
     </script>
 </body>
